@@ -26,6 +26,7 @@ const LastSeen = props => {
 
         setSec(secPassed);
         if (secPassed < 0) {
+
             let timeToStrartCounting = (-secPassed * SECOND) + perfectTiming - SECOND; // time to start sec ticking
 
             startTicking(timeToStrartCounting, STEP_SEC);
@@ -36,8 +37,8 @@ const LastSeen = props => {
             startTicking(perfectTiming, STEP_SEC); // immediate start
 
             console.log('%c time to increase seconds: ', 'background: grey; color: #003300', perfectTiming)
-
         } else {
+
             let leftedSecTicks = (60 - 1) - (secPassed % 60);
             let timeToIncreaseMin = (leftedSecTicks * SECOND) + perfectTiming; // time left to the full minute
 
