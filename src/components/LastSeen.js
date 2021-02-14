@@ -21,26 +21,26 @@ const LastSeen = props => {
     useEffect(() => {
         let now = Date.now();
         let nowTimeStamp = Math.floor(now / SECOND);
-        let perfectTiming = SECOND - (now % SECOND); // time remaining to the full secund
+        let perfectTiming = SECOND - (now % SECOND); // time remaining to the full second
         let secPassed = nowTimeStamp - props.timeStamp;
 
         setSec(secPassed);
         if (secPassed < 0) {
 
-            let timeToStrartCounting = (-secPassed * SECOND) + perfectTiming - SECOND; // time to start sec ticking
+            let timeToStartCounting = (-secPassed * SECOND) + perfectTiming - SECOND; // time to start sec ticking
 
-            startTicking(timeToStrartCounting, STEP_SEC);
+            startTicking(timeToStartCounting, STEP_SEC);
 
-            console.log('%c time to start counting: ', 'background: red; color: #003300', timeToStrartCounting)
-        } else if (secPassed < 60 && secPassed >= 0) {
+            console.log('%c time to start counting: ', 'background: red; color: #003300', timeToStartCounting)
+        } else if (secPassed < STEP_MIN && secPassed >= 0) {
 
             startTicking(perfectTiming, STEP_SEC); // immediate start
 
             console.log('%c time to increase seconds: ', 'background: grey; color: #003300', perfectTiming)
         } else {
 
-            let leftedSecTicks = (60 - 1) - (secPassed % 60);
-            let timeToIncreaseMin = (leftedSecTicks * SECOND) + perfectTiming; // time left to the full minute
+            let leftSecTicks = (STEP_MIN - STEP_SEC) - (secPassed % STEP_MIN);
+            let timeToIncreaseMin = (leftSecTicks * SECOND) + perfectTiming; // time left to the full minute
 
             startTicking(timeToIncreaseMin, STEP_MIN)
 
